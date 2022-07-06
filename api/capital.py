@@ -10,6 +10,7 @@ class Handler(BaseHTTPRequestHandler):
         dictionary = dict(query_string_list)
         url = "https://restcountries.com/v2/"
 
+        capital = dictionary.get("capital")
         country = dictionary.get("country")
 
         if country:
@@ -17,6 +18,13 @@ class Handler(BaseHTTPRequestHandler):
             data = response.json()
             capital_name = data[0]["capital"]
             message = f"The capital of {country} is {capital_name}"
+
+        elif capital:
+            response = requests.get(url + "capital/" + capital)
+            data = response.json()
+            capitals = data[0]["capital"]
+            country_name = data[0]["name"]
+            message = f"{capitals} is the capital of {country_name}"
 
         else:
             message = "Please write a city name to get info about it"
