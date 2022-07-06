@@ -10,8 +10,8 @@ class Handler(BaseHTTPRequestHandler):
         dictionary = dict(query_string_list)
         url = "https://restcountries.com/v2/"
 
-        capital = dictionary.get("capital")
         country = dictionary.get("country")
+        capital = dictionary.get("capital")
 
         if country:
             response = requests.get(url + "name/" + country)
@@ -27,9 +27,7 @@ class Handler(BaseHTTPRequestHandler):
             message = f"{capitals} is the capital of {country_name}"
 
         else:
-            message = "Please write a city name to get info about it"
-
-
+            message = "Please provide a name of a country/capital"
 
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
