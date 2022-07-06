@@ -10,8 +10,8 @@ class Handler(BaseHTTPRequestHandler):
         dictionary = dict(query_string_list)
         url = "https://restcountries.com/v2/"
 
-        capital = dictionary.get("capital")
         country = dictionary.get("country")
+        capital = dictionary.get("capital")
 
         if country:
             response = requests.get(url + "name/" + country)
